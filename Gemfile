@@ -14,7 +14,7 @@ gem 'jbuilder', '~> 2.11'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.17'
+gem 'bcrypt', '~> 3.1.18'
 gem 'dotenv-rails', groups: [:development]
 gem 'google-apis-gmail_v1'
 gem 'jwt', '~> 2.3'
