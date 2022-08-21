@@ -1,0 +1,20 @@
+AllCops:
+  NewCops: enable
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+Layout/IndentationWidth:
+  Width: 1
+Layout/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 15
+Style/Documentation:
+  Enabled: false
+Style/LambdaCall:
+  EnforcedStyle: braces
