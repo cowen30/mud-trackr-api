@@ -29,6 +29,13 @@ class ResultsController < ActionController::API
 		render :show
 	end
 
+	def stats
+		params.deep_transform_keys!(&:underscore)
+		@results = Result.joins(participant: [:age_group, { event_detail: :event }])
+		@results = @results.where(participant: { event_detail: params[:event_detail_id] })
+		render :stats
+	end
+
 	private
 
 	def determine_sort_field

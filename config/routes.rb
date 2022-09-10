@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
 	resources :events
 	resources :event_details, path: '/event-details'
-	resources :results
+	scope '/results' do
+		get 'stats', to: 'results#stats'
+	end
+	resources :results, only: :index
 
 end
