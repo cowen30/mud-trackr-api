@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 		get 'stats', to: 'results#stats'
 	end
 	resources :results, only: :index
+	resources :participants, only: :index
 
 end
