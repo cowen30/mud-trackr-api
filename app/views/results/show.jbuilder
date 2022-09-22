@@ -21,7 +21,7 @@ json.results @results do |result|
 	json.pit_time_total_seconds result.result_details.sum(:pit_time)
 	json.lap_time_average_seconds result.result_details.average(:lap_time)
 	json.pit_time_average_seconds result.result_details.average(:pit_time)
-	json.lap_details result.result_details do |details|
+	json.lap_details result.result_details.sort { |x, y| x.lap_number <=> y.lap_number } do |details|
 		json.id details.id
 		json.lap_number details.lap_number
 		json.lap_time_seconds details.lap_time
