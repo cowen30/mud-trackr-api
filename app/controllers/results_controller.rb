@@ -2,6 +2,11 @@
 
 class ResultsController < ActionController::API
 
+	PARAM_DEFAULTS = {
+		page: 1,
+		page_size: 25
+	}.freeze
+
 	SORT_FIELD_DEFAULT = :place_overall
 	SORT_FIELD_OPTIONS = {
 		place_overall: :place_overall,
@@ -15,7 +20,7 @@ class ResultsController < ActionController::API
 	SORT_DIRECTION_OPTIONS = %i[asc desc].freeze
 
 	def index
-		params.deep_transform_keys!(&:underscore)
+		params.deep_transform_keys!(&:underscore).reverse_merge!(PARAM_DEFAULTS)
 		@results = Result.includes(%i[result_details]).joins([participant: [:person, { event_detail: :event }]]).where(participant: { event_details: { events: { archived: false } } })
 		@results = @results.where(participant: { event_detail: params[:event_detail_id] }) if params[:event_detail_id].present?
 		@results = @results.unscope(where: { events: :archived }) if params[:include_archived].present? && params[:include_archived] == 'true'
@@ -26,6 +31,7 @@ class ResultsController < ActionController::API
 			sort_direction = determine_sort_direction
 		end
 		@results = @results.order(sort_field => sort_direction)
+		@results = @results.page(params[:page]).per(params[:page_size])
 		render :show
 	end
 

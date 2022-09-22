@@ -1,3 +1,7 @@
+json.metadata do
+	json.total_pages @results.total_pages
+	json.current_page @results.current_page
+end
 json.total @results.count
 json.results @results do |result|
 	json.id result.id
