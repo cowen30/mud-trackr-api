@@ -4,7 +4,7 @@ json.results @results do |result|
 	json.place_overall result.place_overall
 	json.place_gender result.place_gender
 	json.place_age_group result.place_age_group
-	json.status result.status.upcase
+	json.status result.status ? result.status.upcase : nil
 	json.participant do
 		json.id result.participant.id
 		json.person result.participant.person.attributes
