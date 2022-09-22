@@ -18,7 +18,7 @@ json.results @results do |result|
 		json.age_group result.participant.age_group.name
 	end
 	json.laps_total result.result_details.count
-	json.distance_total result.result_details.sum(:lap_distance)
+	json.distance_total result.participant.event_detail.lap_distance ? (result.participant.event_detail.lap_distance * result.result_details.count) : result.result_details.sum(:lap_distance)
 	json.distance_units result.participant.event_detail.distance_units
 	json.time_total_seconds result.result_details.sum(:lap_time) + result.result_details.sum(:pit_time)
 	json.lap_time_total_seconds result.result_details.sum(:lap_time)
