@@ -1,4 +1,9 @@
-json.array! @participants do |participant|
+json.metadata do
+	json.total @participants.total_count
+	json.total_pages @participants.total_pages
+	json.current_page @participants.current_page
+end
+json.participants @participants do |participant|
 	json.id participant.id
 	json.person do
 		json.id participant.person.id
