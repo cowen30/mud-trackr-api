@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 	scope '/results' do
 		get 'stats', to: 'results#stats'
 	end
-	resources :results, only: :index
+	resources :results, only: :index do
+		resources :result_details, path: '/details', only: :index
+	end
 	resources :participants, only: :index
 
 end
