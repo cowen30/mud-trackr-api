@@ -17,20 +17,12 @@ json.results @results do |result|
 		json.age result.participant.age
 		json.age_group result.participant.age_group.name
 	end
-	json.laps_total result.result_details.count
-	json.distance_total result.participant.event_detail.lap_distance ? (result.participant.event_detail.lap_distance * result.result_details.count) : result.result_details.sum(:lap_distance)
+	json.laps_total result.laps_total
+	json.distance_total result.participant.event_detail.lap_distance ? (result.participant.event_detail.lap_distance * result.laps_total) : result.lap_distance_total
 	json.distance_units result.participant.event_detail.distance_units
-	json.time_total_seconds result.result_details.sum(:lap_time) + result.result_details.sum(:pit_time)
-	json.lap_time_total_seconds result.result_details.sum(:lap_time)
-	json.pit_time_total_seconds result.result_details.sum(:pit_time)
-	json.lap_time_average_seconds result.result_details.average(:lap_time)
-	json.pit_time_average_seconds result.result_details.average(:pit_time)
-	json.lap_details result.result_details.sort { |x, y| x.lap_number <=> y.lap_number } do |details|
-		json.id details.id
-		json.lap_number details.lap_number
-		json.lap_time_seconds details.lap_time
-		json.pit_time_seconds details.pit_time
-		json.lap_distance details.lap_distance
-		json.distance_units details.distance_units
-	end
+	json.time_total_seconds result.time_total
+	json.lap_time_total_seconds result.lap_time_total
+	json.pit_time_total_seconds result.pit_time_total
+	json.lap_time_average_seconds result.lap_time_avg
+	json.pit_time_average_seconds result.pit_time_avg
 end
