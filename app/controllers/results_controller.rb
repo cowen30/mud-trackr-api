@@ -30,7 +30,7 @@ class ResultsController < ActionController::API
 				filter_clause.and(Result.where('people.name ILIKE ?', "%#{search_term}%")
 				.or(Result.where('people.last_name ILIKE ?', "%#{search_term}%")
 				.or(Result.where('people.first_name ILIKE ?', "%#{search_term}%")
-				.or(Result.where('participant.bib_number ILIKE ?', "%#{search_term}%")))))
+				.or(Result.where('participants.bib_number ILIKE ?', "%#{search_term}%")))))
 		end
 
 		sort_field = SORT_FIELD_DEFAULT
