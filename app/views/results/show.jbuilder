@@ -15,7 +15,7 @@ json.results @results do |result|
 		json.bib_number result.participant.bib_number
 		json.gender result.participant.gender
 		json.age result.participant.age
-		json.age_group result.participant.age_group.name
+		json.age_group result.participant.age_group ? result.participant.age_group.name : nil
 	end
 	json.laps_total result.laps_total
 	json.distance_total result.participant.event_detail.lap_distance ? (result.participant.event_detail.lap_distance * result.laps_total) : result.lap_distance_total
