@@ -14,5 +14,5 @@ json.participants @participants do |participant|
 	json.bib_number participant.bib_number
 	json.gender participant.gender
 	json.age participant.age
-	json.age_group participant.age_group.name
+	json.age_group participant.age_group ? participant.age_group.name : nil
 end

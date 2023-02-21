@@ -9,9 +9,9 @@ class ParticipantsController < ActionController::API
 
 	def index
 		params.deep_transform_keys!(&:underscore).reverse_merge!(PARAM_DEFAULTS)
-		@participants = Participant.joins(:person)
+		@participants = Participant.joins(:person).includes([:person, :age_group])
 		@participants = @participants.where(event_detail_id: params[:event_detail_id])
-		@participants = @participants.order(name: :asc)
+		@participants = @participants.order('people.name ASC')
 		@participants = @participants.page(params[:page]).per(params[:page_size])
 	end
 
