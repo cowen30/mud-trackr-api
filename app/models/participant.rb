@@ -2,6 +2,6 @@ class Participant < ApplicationRecord
 
 	belongs_to :event_detail
 	belongs_to :person
-	belongs_to :age_group
+	belongs_to :age_group, optional: true
 
 end
