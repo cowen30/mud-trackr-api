@@ -17,12 +17,12 @@ json.results @results do |result|
 		json.age result.participant.age
 		json.age_group result.participant.age_group ? result.participant.age_group.name : nil
 	end
-	json.laps_total result.laps_total
-	json.distance_total result.participant.event_detail.lap_distance ? (result.participant.event_detail.lap_distance * result.laps_total) : result.lap_distance_total
+	json.laps_total result.result_details_stat.laps_total
+	json.distance_total result.result_details_stat.lap_distance_total ? result.result_details_stat.lap_distance_total : result.result_details_stat.default_distance_total
 	json.distance_units result.participant.event_detail.distance_units
-	json.time_total_seconds result.time_total
-	json.lap_time_total_seconds result.lap_time_total
-	json.pit_time_total_seconds result.pit_time_total
-	json.lap_time_average_seconds result.lap_time_avg
-	json.pit_time_average_seconds result.pit_time_avg
+	json.time_total_seconds result.result_details_stat.time_total
+	json.lap_time_total_seconds result.result_details_stat.lap_time_total
+	json.pit_time_total_seconds result.result_details_stat.pit_time_total
+	json.lap_time_average_seconds result.result_details_stat.lap_time_avg
+	json.pit_time_average_seconds result.result_details_stat.pit_time_avg
 end

@@ -4,5 +4,6 @@ class Result < ApplicationRecord
 
 	belongs_to :participant
 
+	has_one :result_details_stat
 
 end

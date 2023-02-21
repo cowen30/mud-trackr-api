@@ -23,7 +23,11 @@ class ResultsController < ActionController::API
 	def index
 		params.deep_transform_keys!(&:underscore).reverse_merge!(PARAM_DEFAULTS)
 
-		filter_clause = Result.joins(:participant).where(participants: { event_detail: params[:event_detail_id] }) if params[:event_detail_id].present?
+		filter_clause = Result.joins(:participant)
+		filter_clause = filter_clause.where(participants: { event_detail: params[:event_detail_id] }) if params[:event_detail_id].present?
+		filter_clause = filter_clause.where('extract(year from event_details.start_date) = ?', params[:year]) if params[:year].present?
+		filter_clause = filter_clause.where(participants: { event_detail: { events: { region: params[:region] } } }) if params[:region].present?
+		filter_clause = filter_clause.where(participants: { event_detail: { events: { country: params[:country] } } }) if params[:country].present?
 		if params[:search].present?
 			search_term = params[:search]
 			filter_clause =
@@ -41,38 +45,15 @@ class ResultsController < ActionController::API
 		end
 
 		order_clause = Result.order(sort_field => sort_direction)
-			.order('lap_distance_total DESC')
-			.order('lap_time_total ASC')
+			.order(Arel.sql('COALESCE(result_details_stats.lap_distance_total, result_details_stats.default_distance_total) DESC'))
+			.order('result_details_stats.lap_time_total ASC')
 		pagination_clause = Result.page(params[:page]).per(params[:page_size])
-
-		@result_details =
-			Result
-			.joins([participant: %i[person event_detail]])
-			.left_outer_joins(:result_details)
-			.group(:id)
-			.select(
-				'results.id',
-				'sum(result_details.lap_distance) as lap_distance_total',
-				'sum(result_details.lap_time) + sum(result_details.pit_time) as time_total',
-				'sum(result_details.lap_time) as lap_time_total',
-				'sum(result_details.pit_time) as pit_time_total',
-				'avg(result_details.lap_time) as lap_time_avg',
-				'avg(result_details.pit_time) as pit_time_avg',
-				'count(result_details.*) as laps_total'
-			)
-			.merge(filter_clause)
 
 		@results =
 			Result
-			.joins([participant: %i[person event_detail]])
-			.joins("INNER JOIN (#{@result_details.to_sql}) aggregate ON results.id = aggregate.id")
-			.includes(([participant: %i[person event_detail age_group]]))
-			.select(
-				'results.*',
-				'aggregate.*'
-			)
-			.unscope(where: { participants: :event_detail })
-			.where('participants_results.event_detail_id = ?', params[:event_detail_id])
+			.joins([{ participant: [:person, event_detail: :event] }, :result_details_stat])
+			.includes([{ participant: %i[person event_detail age_group] }, :result_details_stat])
+			.merge(filter_clause)
 			.merge(order_clause)
 			.merge(pagination_clause)
 
