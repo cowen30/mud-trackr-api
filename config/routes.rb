@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	resources :event_details, path: '/event-details'
 	scope '/results' do
 		get 'stats', to: 'results#stats'
+		post 'load', to: 'results#load'
 	end
 	resources :results, only: :index do
 		resources :result_details, path: '/details', only: :index

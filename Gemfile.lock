@@ -66,6 +66,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     backport (1.2.0)
     benchmark (0.2.1)
@@ -79,10 +81,24 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     e2mmap (0.1.0)
     erubi (1.11.0)
+    ffi (1.15.5)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (1.0.0)
       activesupport (>= 5.0)
+    http (5.1.1)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
+    http-form_data (2.3.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -109,6 +125,9 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -142,6 +161,7 @@ GEM
     parser (3.2.0.0)
       ast (~> 2.4.1)
     pg (1.4.5)
+    public_suffix (5.0.1)
     puma (6.0.1)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -218,6 +238,9 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     webrick (1.7.0)
     websocket-driver (0.7.5)
@@ -233,6 +256,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  http (~> 5.1.1)
   jbuilder
   kaminari
   pg (~> 1.4.5)

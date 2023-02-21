@@ -67,6 +67,13 @@ class ResultsController < ActionController::API
 		render :stats
 	end
 
+	def load
+		params.deep_transform_keys!(&:underscore)
+		course_id = params[:course_id]
+		results = ConquestEvents.get_results(course_id)
+		ConquestEvents.parse_results(results)
+	end
+
 	private
 
 	def determine_sort_field
