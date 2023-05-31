@@ -12,7 +12,7 @@ gem 'kaminari'
 gem 'pg', '~> 1.4.6'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.1"
+gem "puma", "~> 6.3"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
