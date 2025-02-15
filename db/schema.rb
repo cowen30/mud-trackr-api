@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_12_160007) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_192300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_160007) do
     t.string "distance_units"
     t.decimal "lap_elevation"
     t.string "elevation_units"
+    t.boolean "variable_lap_distance", default: false, null: false
     t.index ["event_id"], name: "index_event_details_on_event_id"
     t.index ["event_type_id"], name: "index_event_details_on_event_type_id"
   end
