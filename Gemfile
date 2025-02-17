@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4"
+gem "rails", "~> 7.0.5"
 
 gem 'kaminari'
 
@@ -12,7 +12,7 @@ gem 'kaminari'
 gem 'pg', '~> 1.4.6'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.1"
+gem "puma", "~> 6.4"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
